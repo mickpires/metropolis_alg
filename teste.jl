@@ -1,5 +1,3 @@
-using Random
-using Distributions
-
-a = rand(Uniform(0,1),3,2)
-println(a)
+using Plots
+using Optim
+include("markov.jl")
