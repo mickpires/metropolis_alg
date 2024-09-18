@@ -5,13 +5,13 @@ include("functions.jl")
 
 function markov(N,r, α, γ,T,iter)
     
-    A = N*π*r^2/γ
-    xmax = sqrt(A)
+    xmax = sqrt(1)
     particulas = rand(Uniform(0,xmax),N,2)
 
     k_B = 1.38e-23
     β = k_B*T
     EE = []
+    energies = []
 
     tentativas = 0
     tentativas_sucesso = 0
@@ -51,10 +51,12 @@ function markov(N,r, α, γ,T,iter)
 
                     if ΔE ≤ 0
                         tentativas_sucesso += 1
+                        particulas = copy(new_particulas)
                         break
                     else
                         random_energy = rand(Uniform(0,1))
                         if random_energy ≤ β * ΔE
+                            particulas = copy(new_particulas)
                             tentativas_sucesso += 1
                             break
                         end
@@ -62,9 +64,10 @@ function markov(N,r, α, γ,T,iter)
                 end
         end
         local ΔE
+        push!(energies,energy(particulas))
         push!(EE,ΔE)
 
     end
     println("A razão entre sucessos e tentativas é: ",tentativas_sucesso/tentativas)
-    return EE, tentativas_sucesso/tentativas
+    return EE, tentativas_sucesso/tentativas, energies
 end

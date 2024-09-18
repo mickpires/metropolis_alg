@@ -11,11 +11,11 @@ function energy(particles)
             if particle1 == particle2
                 continue
             end
-            coulomb += 4*(1/norm(particles[particle1])^6 - 1/(particles[particle2])^12)
+            coulomb += 4*(1/particle1^6 - 1/particle2^12)
             push!(ignore_list,particle1)
         end
     end
     
-    return coulomb
+    return 1/2*coulomb
 
 end
