@@ -1,21 +1,5 @@
-using Distributions
-using Random
-
-function y(x)
-    return x^2
-end
+using LinearAlgebra
 
 
-a = 0
-
-b = 2
-iter = 2000
-
-yy = []
-
-for i ∈ 1:iter
-    x = rand(Uniform(a,b))
-    push!(yy,y(x))
-end
-
-println("A área é ", (b-a)*mean(yy))
+a = [2 3 ; 4 3 ; 2 4]
+a[1,:]

@@ -2,7 +2,7 @@ using LinearAlgebra
 
 function energy(particles)
     ignore_list = []
-    coulomb = 0
+    potential = 0
     for particle1 in 1:size(particles)[1]
         if particle1 ∈ ignore_list
             continue
@@ -11,11 +11,11 @@ function energy(particles)
             if particle1 == particle2
                 continue
             end
-            coulomb += 4*(1/particle1^6 - 1/particle2^12)
+            potential += 4*(1/norm(particles[particle1])^6 - 1/(particles[particle2])^12)
             push!(ignore_list,particle1)
         end
     end
     
-    return 1/2*coulomb
+    return potential
 
 end

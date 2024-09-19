@@ -1,21 +1,11 @@
 using LinearAlgebra
 
-function energy(particles)
-    ignore_list = []
-    coulomb = 0
-    for particle1 in 1:size(particles)[1]
-        if particle1 ∈ ignore_list
-            continue
-        end
-        for particle2 in 1:size(particles)[1]
-            if particle1 == particle2
-                continue
-            end
-            coulomb += 4*(1/norm(particles[particle1])^6 - 1/(particles[particle2])^12)
-            push!(ignore_list,particle1)
-        end
-    end
-    
-    return coulomb
+function energy(particles,m,N)
 
+    velocities = []
+    for i ∈ 1:N
+        push!(velocities,particles[i,:]'particles[i,:])
+    end
+    energy = m * sum(velocities)/2
+    return energy
 end

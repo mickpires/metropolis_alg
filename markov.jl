@@ -5,7 +5,7 @@ include("functions.jl")
 
 function markov(N,r, α, γ,T,iter)
     
-    xmax = sqrt(1)
+    xmax = sqrt()
     particulas = rand(Uniform(0,xmax),N,2)
 
     k_B = 1.38e-23
