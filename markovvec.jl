@@ -6,11 +6,10 @@ include("functions.jl")
 function markov(N,m,T,velocities,iter)
 
     particulas = rand(Uniform(-velocities,velocities),N,2)
-
     k_B = 1.38e-23
-    β = k_B*T
+    β = 1/(k_B*T)
+    ΔEE = []
     EE = []
-    energies = []
 
     tentativas = 0
     tentativas_sucesso = 0
@@ -45,11 +44,9 @@ function markov(N,m,T,velocities,iter)
                 end
         end
         local ΔE
-        println("valor da variação da energia: ",ΔE)
-        push!(energies,energy(particulas,m,N))
-        push!(EE,ΔE)
+        push!(EE,energy(particulas,m,N))
+        push!(ΔEE,ΔE)
 
     end
-    println("A razão entre sucessos e tentativas é: ",tentativas_sucesso/tentativas)
-    return EE, tentativas_sucesso/tentativas, energies, particulas
+    return ΔEE, tentativas_sucesso/tentativas, EE, particulas, β
 end

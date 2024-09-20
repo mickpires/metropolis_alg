@@ -1,5 +1,3 @@
-using LinearAlgebra
-
-
-a = [2 3 ; 4 3 ; 2 4]
-a[1,:]
+t = [3,5,4]
+k =2
+β = k*t
