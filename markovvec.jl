@@ -19,7 +19,6 @@ function markov(N,m,T,velocities,iter)
     for loops ∈ 1:iter
         new_particulas = copy(particulas)
         println("loop: ",loops)
-        println("tentativas ",tentativas)
         for i ∈ 1:N
                 while true
                     tentativas += 1

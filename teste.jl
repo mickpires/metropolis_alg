@@ -1,3 +1,3 @@
-t = [3,5,4]
-k =2
-β = k*t
+print("Insira um nome: ")
+s = readline()
+println("O seu nome é $s")
