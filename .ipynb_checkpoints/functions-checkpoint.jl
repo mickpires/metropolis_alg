@@ -1,21 +1,26 @@
 using LinearAlgebra
 
-function energy(particles)
-    ignore_list = []
-    potential = 0
-    for particle1 in 1:size(particles)[1]
-        if particle1 ∈ ignore_list
-            continue
-        end
-        for particle2 in 1:size(particles)[1]
-            if particle1 == particle2
-                continue
-            end
-            potential += 4*(1/norm(particles[particle1])^6 - 1/(particles[particle2])^12)
-            push!(ignore_list,particle1)
-        end
-    end
-    
-    return potential
+function energy(particles,m,N)
 
+    velocities = []
+    for i ∈ 1:N
+        push!(velocities,particles[i,:]'particles[i,:])
+    end
+    energy = m * sum(velocities)/2
+    return energy
+end
+
+function convert_to_float_array(strings)
+    float_arrays = []
+    for str in strings
+        # Remove a parte "Any[" e o fechamento "]"
+        cleaned_str = replace(str, r"Any\[" => "[")
+        
+        # Avalia a string como uma expressão
+        float_array = eval(Meta.parse(cleaned_str))
+        
+        # Adiciona o array de floats ao array final
+        push!(float_arrays, float_array)
+    end
+    return float_arrays
 end
